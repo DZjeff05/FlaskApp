@@ -49,24 +49,24 @@ jobs:
 
       - name: Build and push Docker image to Docker Hub
         run: |
-          docker build -t yourusername/flaskapp:latest .
-          docker push yourusername/flaskapp:latest
+          docker build -t jeff2005/my-flask-app:latest .
+          docker push jeff2005/my-flask-app:latest
 
       - name: Build and push Docker image to Private Registry
         run: |
-          echo "${{ secrets.PRIVATE_REGISTRY_PASSWORD }}" | docker login your-private-registry.com -u "${{ secrets.PRIVATE_REGISTRY_USERNAME }}" --password-stdin
-          docker build -t your-private-registry.com/yourusername/flaskapp:latest .
-          docker push your-private-registry.com/yourusername/flaskapp:latest
+          echo "${{ secrets.PRIVATE_REGISTRY_PASSWORD }}" | docker login docker.com -u "${{ secrets.PRIVATE_REGISTRY_USERNAME }}" --password-stdin
+          docker build -t docker.com/jeff2005/my-flask-app:latest .
+          docker push docker.com/jeff2005/my-flask-app:latest
 
       - name: Send notification email on failure
         if: failure()
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.your-email-provider.com
+          server_address: smtp.gmail.com
           server_port: 587
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "Build Failed"
           body: "The build has failed. Please check the logs."
-          to: recipient@example.com
-          from: sender@example.com
+          to: djoussejeff@gmail.com
+          from: djoussejeff@gmail.com
